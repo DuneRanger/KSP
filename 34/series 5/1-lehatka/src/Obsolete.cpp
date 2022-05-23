@@ -7,9 +7,6 @@
 
 using namespace std;
 
-uint64_t;
-
-
 int main() {
     string fileDir = "inOut/01";
     ifstream inputFile;
@@ -18,7 +15,9 @@ int main() {
     inputFile.open(fileDir + ".in", ios::in);
 
     int numOfHippos, numOfChairs;
-
+    // todo: change a and b to numOfHippos and numOfChairs
+    // numOfHippos == indexes.size()
+    // numOfChairs == chairs.size()
     inputFile >> numOfHippos >> numOfChairs;
     cout << numOfHippos << " " << numOfChairs << endl;
 
@@ -81,21 +80,6 @@ int main() {
     
     uint64_t currentMin = *min_element(chairDists+1, chairDists+numOfHippos);
 
-    for (int i = 1; i < numOfHippos-1; i++) {
-        // uint64_t chairMinDist = min(chairDists[i], chairDists[i+1]);
-        int newInd = indexes[i]-1;
-        uint64_t tempDist1 = chairs[newInd] - chairs[indexes[i-1]];
-        uint64_t tempDist2 = chairs[indexes[i+1]] - chairs[newInd];
-        cout << chairDists[i] << " " << chairDists[i+1] << " " << tempDist1 << " " << tempDist2 << " " << newInd << endl;
-        if (currentMin < min(tempDist1, tempDist2)) {
-            chairDists[i] = tempDist1;
-            chairDists[i+1] = tempDist2;
-            indexes[i] = newInd;
-            i = max(0, i-2); //because i++ will set to to 1
-            cout << endl;
-        }
-    }
-
     //prints current info
     for (int i = 0; i < numOfHippos; i++) {
         cout << indexes[i] << " " << chairs[indexes[i]] << " " << chairDists[i] << endl;
@@ -111,51 +95,51 @@ int main() {
     //save current permutation and answer
     //if a better one is found, replace it and set new currentMin
     
-    // for (int i = 1; i < numOfHippos-1; i++) {
-    //     int* newIndexes = new int[numOfHippos];
-    //     copy(indexes, indexes+numOfHippos, newIndexes);
-    //     while (true) {
-    //         newIndexes[i] -= 1;
-    //         uint64_t Dist1 = chairs[newIndexes[i]]-chairs[newIndexes[i-1]];
-    //         uint64_t Dist2 = chairs[newIndexes[i+1]]-chairs[newIndexes[i]];
-    //         if (min(Dist1, Dist2) < currentMin) {
-    //             cout << "no permutation" << endl;
-    //             break;
-    //         } else {
-    //             cout << "new permutation" << endl;
-    //             uint64_t* newChairDists = new uint64_t[numOfChairs];
-    //             copy(chairDists, chairDists+numOfChairs, newChairDists);
-    //             newChairDists[i] = Dist1;
-    //             newChairDists[i+1] = Dist2;
-    //             for (int j = 1; j < numOfHippos-1; j++) {
-    //                 uint64_t chairMinDist = min(newChairDists[j], newChairDists[j+1]);
-    //                 int newInd = newIndexes[j]-1;
-    //                 uint64_t tempDist1 = chairs[newInd] - chairs[newIndexes[j-1]];
-    //                 uint64_t tempDist2 = chairs[newIndexes[j+1]] - chairs[newInd];
-    //                 cout << newChairDists[j] << " " << newChairDists[j+1] << " " << tempDist1 << " " << tempDist2 << " " << newInd << endl;
-    //                 if (chairMinDist < min(tempDist1, tempDist2)) {
-    //                     newChairDists[j] = tempDist1;
-    //                     newChairDists[j+1] = tempDist2;
-    //                     newIndexes[j] = newInd;
-    //                     j = max(0, j-2); //because j++ will set to to 1
-    //                     cout << endl;
-    //                 }
-    //             }
-    //             for (int z = 0; z < numOfHippos; z++) {
-    //                 cout << newIndexes[z] << " " << chairs[newIndexes[z]] << " " << newChairDists[z] << endl;
-    //             }
-    //             cout << currentMin << " " << *min_element(newChairDists+1, newChairDists+numOfHippos) << endl;
-    //             if (currentMin < *min_element(newChairDists+1, newChairDists+numOfHippos)) {
-    //                 currentMin = *min_element(newChairDists+1, newChairDists+numOfHippos);
-    //                 copy(newIndexes, newIndexes+numOfHippos, indexes);
-    //                 copy(newChairDists, newChairDists+numOfHippos, chairDists);
-    //                 cout << "rewritten" << endl;
-    //                 i = 1;
-    //             }
-    //             cout << endl;
-    //         }
-    //     }
-    // }
+    for (int i = 1; i < numOfHippos-1; i++) {
+        int* newIndexes = new int[numOfHippos];
+        copy(indexes, indexes+numOfHippos, newIndexes);
+        while (true) {
+            newIndexes[i] -= 1;
+            uint64_t Dist1 = chairs[newIndexes[i]]-chairs[newIndexes[i-1]];
+            uint64_t Dist2 = chairs[newIndexes[i+1]]-chairs[newIndexes[i]];
+            if (min(Dist1, Dist2) < currentMin) {
+                cout << "no permutation" << endl;
+                break;
+            } else {
+                cout << "new permutation" << endl;
+                uint64_t* newChairDists = new uint64_t[numOfChairs];
+                copy(chairDists, chairDists+numOfChairs, newChairDists);
+                newChairDists[i] = Dist1;
+                newChairDists[i+1] = Dist2;
+                for (int j = 1; j < numOfHippos-1; j++) {
+                    uint64_t chairMinDist = min(newChairDists[j], newChairDists[j+1]);
+                    int newInd = newIndexes[j]-1;
+                    uint64_t tempDist1 = chairs[newInd] - chairs[newIndexes[j-1]];
+                    uint64_t tempDist2 = chairs[newIndexes[j+1]] - chairs[newInd];
+                    cout << newChairDists[j] << " " << newChairDists[j+1] << " " << tempDist1 << " " << tempDist2 << " " << newInd << endl;
+                    if (chairMinDist < min(tempDist1, tempDist2)) {
+                        newChairDists[j] = tempDist1;
+                        newChairDists[j+1] = tempDist2;
+                        newIndexes[j] = newInd;
+                        j = max(0, j-2); //because j++ will set to to 1
+                        cout << endl;
+                    }
+                }
+                for (int z = 0; z < numOfHippos; z++) {
+                    cout << newIndexes[z] << " " << chairs[newIndexes[z]] << " " << newChairDists[z] << endl;
+                }
+                cout << currentMin << " " << *min_element(newChairDists+1, newChairDists+numOfHippos) << endl;
+                if (currentMin < *min_element(newChairDists+1, newChairDists+numOfHippos)) {
+                    currentMin = *min_element(newChairDists+1, newChairDists+numOfHippos);
+                    copy(newIndexes, newIndexes+numOfHippos, indexes);
+                    copy(newChairDists, newChairDists+numOfHippos, chairDists);
+                    cout << "rewritten" << endl;
+                    i = 1;
+                }
+                cout << endl;
+            }
+        }
+    }
 
     //prints current info
     for (int i = 0; i < numOfHippos; i++) {
