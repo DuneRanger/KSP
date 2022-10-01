@@ -8,53 +8,8 @@
 #include <limits>
 using namespace std;
 
-int SpecialisedGetIndex(pair<int, int>* input, int start, int end, int searched) {
-        for (int i = start; i < end; i++) {
-        if (input[i].first == searched) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-uint64_t SpecialisedGetMaxOfPairs(pair<uint64_t, uint64_t>* input, int end, bool temp) {
-    uint64_t max = 0;
-    if (temp) {
-        for (int i = 0; i < end; i++) {
-            if (input[i].first > max) {
-                max = input[i].first;
-            }
-        }
-    } else {
-        for (int i = 0; i < end; i++) {
-            if (input[i].second > max) {
-                max = input[i].second;
-            }
-        } 
-    }
-    return max;
-}
-
-uint64_t SpecialisedGetMinOfPairs(pair<uint64_t, uint64_t>* input, int end, bool temp) {
-    uint64_t min = numeric_limits<float>::infinity();
-    if (temp) {
-        for (int i = 0; i < end; i++) {
-            if (input[i].first < min) {
-                min = input[i].first;
-            }
-        }
-    } else {
-        for (int i = 0; i < end; i++) {
-            if (input[i].second < min) {
-                min = input[i].second;
-            }
-        } 
-    }
-    return min;
-}
-
 int main() {
-    string fileDir = "inOut/03";
+    string fileDir = "inOut/06";
     ifstream inputFile;
     ofstream outputFile;
 
@@ -74,10 +29,39 @@ int main() {
 
     uint64_t temp1, temp2;
     string answer;
-    temp1 = SpecialisedGetMaxOfPairs(days, n, true);
-    temp2 = SpecialisedGetMinOfPairs(days, n, false);
 
-    answer = to_string(temp1) + " " + to_string(n);
+    // sort(days, days+n, [](auto &left, auto &right) {
+    //     return left.second < right.second;
+    // });
+
+    uint64_t* values = new uint64_t[n];
+
+    cout << "n^2 searching" << endl;
+
+    for (int i = 0; i < n; i++) {
+        uint64_t currentDay = days[i].first;
+        uint64_t valueCounter = 1;
+        for (int j = 0; j < n; j++) {
+            if (j == i) continue;
+            else if (days[j].first > currentDay) continue;
+            else if (days[j].second < currentDay) continue;
+            else valueCounter++;
+        }
+        values[i] = valueCounter;
+    }
+
+    cout << "indexing" << endl;
+    uint64_t bestValue = *max_element(values, values+n);
+    uint64_t bestValueIndex;
+    for (int i = 0; i < n; i++) {
+        if (values[i] == bestValue) {
+            bestValueIndex = i;
+            break;
+        }
+    }
+    uint64_t bestDay = days[bestValueIndex].first;
+
+    answer = to_string(bestDay) + " " + to_string(bestValue);
 
     delete[] days;
 
