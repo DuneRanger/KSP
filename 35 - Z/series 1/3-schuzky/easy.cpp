@@ -82,6 +82,7 @@ int main() {
     delete[] days;
 
 
+
     cout << answer;
 
     outputFile.open(fileDir + ".out", ios::out);

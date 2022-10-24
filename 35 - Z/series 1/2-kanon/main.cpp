@@ -38,9 +38,6 @@ int main() {
     copy(cannons, cannons+cannNumber, originalCannons);
     sort(cannons, cannons+cannNumber);
 
-    // for (int i = 0; i < cannNumber; i++) {
-    //     cout << cannons[i].first << " " << cannons[i].second << endl;
-    // }
     cout << "actually searching now" << endl;
 
     string answer = "";
@@ -64,38 +61,10 @@ int main() {
 
                     } while (originalCannons[temp].second != cannons[n].second);
                     answer += to_string(temp);
-                    goto end;
+                    goto end; //instead of a special nested break
                 }
             }
         }
-        // int y = baseY-1;
-        // int x = baseX-1;
-        // while (x > -1 && y > -1) {
-        //     int tempIndex = SpecialisedGetIndex(cannons, 0, i, x);
-
-
-        // }
-
-
-
-        // y = baseY+1;
-        // for (int x = baseX+1; x < width && y < height; x++, y++) {
-        //     int tempIndex = SpecialisedGetIndex(cannons, i, cannNumber, x);
-        //     if (tempIndex > -1 && cannons[tempIndex].second == y) {
-        //         int temp;
-        //         do {
-        //             temp = SpecialisedGetIndex(originalCannons, 0, cannNumber, baseX);
-
-        //         } while (originalCannons[temp].second != baseY);
-        //         answer += to_string(temp) + " ";
-        //         do {
-        //             temp = SpecialisedGetIndex(originalCannons, 0, cannNumber, x);
-
-        //         } while (originalCannons[temp].second != y);
-        //         answer += to_string(temp);
-        //         goto end;
-        //     }
-        // }
     }
     end:
     {
