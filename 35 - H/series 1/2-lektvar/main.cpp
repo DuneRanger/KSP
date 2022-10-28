@@ -7,7 +7,7 @@
 #include <chrono>
 using namespace std;
 
-// g++ -O2 -std=c++11 -Wall "-Wl,--stack=268435456" "main copy.cpp" -o main2.exe
+// g++ -O2 -std=c++11 -Wall "-Wl,--stack=268435456" main.cpp -o main.exe
 
 struct potion {
     vector<uint64_t> dependencies;
@@ -41,8 +41,6 @@ int main() {
     uint64_t potNum, depNum;
     inputFile >> potNum >> depNum;
     cout << potNum << " " << depNum << endl;
-
-    uint64_t* potTimes = new uint64_t[potNum];
 
     for (uint64_t i = 0; i < potNum; i++) {
         potion temp;

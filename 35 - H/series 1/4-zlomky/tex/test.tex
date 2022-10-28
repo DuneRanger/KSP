@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{amssymb}
+\begin{document}
+
+\subsection*{Daniel Culliver}
+\section*{35-1-4 Atlas zlomků}
+
+Každý zlomek v základním tvaru je podíl dvou nesoudělných čísel.
+\\
+Neboli zlomek $\frac{X}{Y}$, kde X $\nmid$ Y.
+\\
+Tedy pro každý Y, musíme vygenerovat Y-$d_{\mathbb{D}_Y}$+1 zlomků, 
+kde $d_{\mathbb{D}_Y}$ je délka množiny $\mathbb{D}_Y$, která vyjadřuje množinu všech dělitelů čísla Y.
+Je potřeba přičíst 1, abychom počítali se zlomkem $\frac{1}{Y}$
+\\
+\\
+Zatím vychází, že pro generování zlomků pro jmenovatele Y je potřeba vypsat Y-$d_{\mathbb{D}_Y}$+1 zlomků.
+Ještě musíme započítat hledání všech dělitelů čísla Y, který využívá algoritmus s časovou komplexitou O($Y^{\frac{1}{3}}$).
+Protože tato komplexita je třetí mocninou Y, zanedbáme ji a budeme dál počítat jen s množstvím operací Y-$d_{\mathbb{D}_Y}$+1, protože roste téměř lineárně.
+\\
+Kvůli zanedbatelného růstu množiny $\mathbb{D}_Y$, celé generování zlomků bychom mohli zjednodušit na:
+\[
+  \sum_{Y=1}^{N} Y = \frac{N(N+1)}{2}
+\]
+\\
+Což vychází jako časová komplexita O($N^{2}$).
+\\
+Tato časová komplexita vychází i kdybychom iterovali přes všechny možnosti a odstranili nevhodné zlomky.
+Tudíž bych očekával, že rychlejší algoritmus existuje, ale nenapadá mě.
+\\
+\\
+Dobrou zprávou je, že paměťová složitost algoritmu je velmi dobrá.
+\\
+Protože každé Y vyžaduje jenom množinu $\mathbb{D}$, abychom věděli které čitatele přeskočit,
+paměťová složitost algoritmu je jenom O(max($d_{\mathbb{D}_Y}$)),
+nebo-li největší velikost množiny $\mathbb{D}_Y$ (Nemusí být nutně $\mathbb{D}_N$)
+což bych neočekával že by ani dosáhlo řádu stovek (vzhledem k tomu že časová složitost bude limitujícím faktorem)
+
+\end{document}
