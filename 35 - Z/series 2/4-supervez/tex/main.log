@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.10.25)  3 NOV 2022 10:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.10.25)  3 NOV 2022 10:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 1/4-zlomky/tex/test.tex"
-(c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 1/4-zlomky/tex/test.tex
+**"c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex"
+(c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex
 LaTeX2e <2022-06-01> patch level 5
 L3 programming layer <2022-09-28> (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -60,8 +60,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count197
 \l__pdf_internal_box=\box51
-) (test.aux)
-\openout1 = `test.aux'.
+) (main.aux)
+\openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
@@ -77,26 +77,16 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 12.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
  (C:\Users\danie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 10--24
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--40
-
- []
-
-
-Overfull \hbox (6.5557pt too wide) in paragraph at lines 26--40
-\OT1/cmr/m/n/12 p^^Tresko^^Tcit, pam^^Te[]tov^^Sa slo^^Tzitost al-go-ritmu je jenom O(max($\OML/cmm/m/it/12 d[]$\OT1/cmr/m/n/12 )), nebo-li nejv^^Tet^^Ts^^S^^P
+Overfull \hbox (7.52042pt too wide) in paragraph at lines 16--22
+[]\OT1/cmr/m/n/12 Existuje ale op-ti-mal-izace. M^^S^^Psto se^^Tcten^^S^^P ^^Tr^^Sadku a sloupce pro ka^^Tzd^^Sy ^^Tctere^^Tcek,
  []
 
 [1
@@ -104,19 +94,19 @@ Overfull \hbox (6.5557pt too wide) in paragraph at lines 26--40
 
 Non-PDF special ignored!
 <special> header=tree-dvips91.pro
-{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (test.aux) ) 
+{C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.aux) ) 
 Here is how much of TeX's memory you used:
  1138 strings out of 475385
- 18026 string characters out of 2776906
- 359469 words of memory out of 3000000
+ 18040 string characters out of 2776906
+ 358469 words of memory out of 3000000
  22562 multiletter control sequences out of 15000+600000
  475115 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,5n,51p,284b,109s stack positions out of 10000i,1000n,20000p,200000b,80000s
-<C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on test.pdf (1 page, 90492 bytes).
+ 41i,5n,51p,270b,107s stack positions out of 10000i,1000n,20000p,200000b,80000s
+<C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on main.pdf (1 page, 57860 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
+ 31 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
