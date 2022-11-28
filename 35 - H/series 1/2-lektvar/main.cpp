@@ -58,17 +58,12 @@ int main() {
     string answer;
     for (uint64_t i = 0; i < potNum; i++) {
         calculatePotionTime(i);
-        // for (int j = 0; j < potNum; j++) {
-        //     if (potions[j].dependencies.size() == 0) cout << j << " " << potions[j].time << endl;
-        // }
+
         answer += to_string(potions[i].time - potions[i].initialTime);
-        // cout << answer << endl; 
         if (i != potNum-1) {
             answer += " ";
         }
     }
-
-    // cout << answer;
 
     outputFile.open(fileDir + ".out", ios::out);
     outputFile << answer;

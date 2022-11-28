@@ -6,17 +6,18 @@
 
 \subsection*{Daniel Culliver}
 \section*{35-Z2-4 Supervěž}
-Čtení šachovnice samotné už je $N^2$ operací, takže to je základní časová komplexita
+Čtení šachovnice samotné už je $N^2$ operací, ale bylo mi sděleno velmi dobrý zdojem (Matúšem), 
+že časová komplexita se počítá jako lineární vůči čtení celého vstupu, tedy čtení NxN šachovnice má časovou komplexitu O($n$). 
 
 První možnost, která člověku napadne, je převést šachovnici na 2D array 1 a 0.
 Poté sečíst řádek a sloupec pro každé místo.
 Toto vyjde na $N^2 * 2N$ operací, což dohromady se čtením šachovnice vyjde na
-$2N^2 * 2N$, nebo-li $4N^3$, což odpovídá časové komplexity O($N^3$).
+$2N^2 * 2N$, nebo-li $4N^3$, což odpovídá časové komplexity O($N^3$) nebo-li O($n \log{n}$).
 
 Existuje ale optimalizace. Místo sečtení řádku a sloupce pro každý čtereček,
 sečteme jenom každý řádek a sloupec a uložím ho do array.
 Poté stačí projet Každý čtereček, ale místo 2N operací, to bude jenom 2 operace.
-Toto vyjde na $2N^2 * 2$ operací, nebo-li časová komplexita O($N^2$).
+Toto vyjde na $2N^2 * 2$ operací, nebo-li lineární časová komplexita vůči vstupu O($n$).
 Vzhledem k tomu, že to je stejná komplexita jako čtení vstupu,
 pravděpodobně se nedá dál optimalizovat časová složitost.
 
@@ -25,9 +26,10 @@ a součty rádků a sloupců je dalších 2N. Toto vychází na paměťová komp
 Ale my nepotřebujeme array šachovnice potom, co jsme sečetli řádky a sloucpe,
 tudíž můžeme ukládání arraye zanedbat a rovnou sečíst řádky a sloucpe při čtení vstupu.
 Toto zabírá 2N místa a uložení čísla N pro for loopy můžeme zanedbat.
-To vychýzí na paměťovou komplexitu O(N).
+To vychýzí na paměťovou komplexitu O(N), tedy O($\log{n}$).
 
-Jako závěr jsme došli k časové komplexitě O($N^2$) a paměťová komplexita O(N).
-
+Jako závěr jsme došli k časové komplexitě O($n$) a paměťová komplexita O($\log{n}$).
+\\\\
+Omlouvám se za veškeré \emph{ť} v dokumentu. Latex píšu dneska podruhé a pravděpodobně je to nastaveným fontem (ještě reším jak to zpravit).
 
 \end{document}

@@ -1,0 +1,99 @@
+\documentclass[12pt]{article}
+\usepackage{lingmacros}
+\usepackage{tree-dvips}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\author{Daniel Culliver}
+\title{35-1-S}
+
+\begin{document}
+
+\maketitle
+\section*{Úkol 1 – Robot na Marsu [5b]}
+Jsou dány 2 vektory v prostoru $\mathbb{R}^2$: $(x_1,y_1)^T$ a $(x_2,y_2)^T$.
+\\
+Jestliže se chceme pohybovat v jednom směru, stačí přičíst a odečíst vektory, dokud \emph{x} nebo \emph{y} bude 0.
+Toto dokážeme velmi jednoduše. Vezmeme tedy $x_1$ a $x_2$:
+
+\makeatletter
+\renewcommand{\algorithmicrequire}{\textbf{Vstup:}}
+\renewcommand{\algorithmicensure}{\textbf{Výstup:}}
+\makeatother
+
+\begin{algorithm}
+    \caption{Vytvoř jednotkový vektor}
+    \begin{algorithmic}[1]
+        \REQUIRE ($x_1, y_1$), ($x_2, y_2$)
+        \STATE $m_1 \gets lcm(x_1, x_2)/x_1$ 
+        \STATE $m_2 \gets lcm(x_1, x_2)/x_2$ 
+        \STATE $(x, y) \gets m_1*(x_1, y_1)-m_2*(x_2, y_2)$
+        \STATE $(x, y) \gets (x, y)/y$
+        \ENSURE ($x, y$), kde buď $x$ je 0 a $y$ je buď 1 nebo -1
+    \end{algorithmic}
+\end{algorithm}
+
+Tento algoritmus je velmi jednoduchý. Zjištění nejmenšího společného násobku je potřeba k tomu,
+Následným dělením zjistíme kolikrát musíme $x_1$ a $x_2$ násobit, abychom tohoto násobku docílili.
+Tento krok samozřejmě lze optimalizovat, ale vzhledem k tomu, že zadání chce jen popis algoritmu,
+nebudu se zaměřovat na komplexitu a efektivita algoritmu, ale jenom na principu.
+
+Když tedy známe $m_1$ a $m_2$, můžeme vektory od sebe odečíst a získame tak vektor, kde $x$ = 0.
+Zbývá nám jenom $y$, které může být libovolné číslo. Stačí jen vydělit tento vektor $y$ a máme výlsedný vektor,
+který určuje pohyb o 1 metr v jednom směru.
+
+To dělení můžeme také pochopit tak, že všechny kroky s původními vektory vlastně dělíme $y$.
+Tedy, robot by spočítal $y$ a následně by se pohyboval $m_1$ krát směrem $(x_1, y_1)/y$ a poté $-m_2$ krát $(x_2, y_2)/y$.
+
+Pro pohyb opačným směrem stačí změnit pořadí vektorů v odečítání a stejný postup můžeme provést pro vynulování $y$ a pohyb ve směru $x$.
+
+Toto je samozřejmě celý s předpokladem, že vectory $(x_1, y_1)$ a $(x_2, y_2)$ nejsou lineárně závislé.
+Pro případ, že jsou lineárně závislé, úlohu nelze vyřešit.
+
+\subsection*{Úkol 2 – Nezávislost a soustavy [3b]}
+
+Na řešení této úlohy můžeme odkázat na úkol 1.
+Tam jsme uvedli, že úkol 1 má řešení právě tehdy když vectory \textbf{$x_1$} a \textbf{$x_2$} nejsou lineárně závislý.
+V takovém případě by totiž vyšel vzniklý vector jako (0, 0).
+Stejný princip můžeme uplatnit u soustavy lineárních rovnic.
+Tedy, jedna rovnice je lineárně závislá na druhou,
+v případě že ji můžeme zcela vynulovat pomocí kroků 1-3 z algoritmu v úkolu 1.
+
+Podobný princip jako z úkolu 1 využívá Gaussova eliminace, která je součástí úkolu 3.
+
+\subsection*{Úkol 3 – Algoritmus eliminace [7b]}
+
+Lehčí varianta (za 4 body) (\href{run:./Gauss-Easy.cpp}{Gauss-Easy.cpp}):
+Až po nějaké práci na těžší variantu si uvědomil, že toto řešení funguje jenom pro celočíselné kořeny,
+protože všude používám int místo float. Bohužel ale už nemám čas toto opravit, ale jediná potřebná změna která mě napadá je,
+že místo $gcm()$ a $lcm()$, které zrovna nefungují s floaty kvůli modula, bych mohl použít ten algoritmus, který jsem popsal v úkolu 1.
+
+Pokus o těžší variantě byl, ale s blížícím školním čtvrtletí jsem musel pokus opustit za upřednostnění školí práce.
+\lstinputlisting[breaklines]{Gauss-Easy.cpp}
+
+\end{document}

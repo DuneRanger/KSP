@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1667469274 "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex" "main.pdf" "main" 1667469275
+["pdflatex"] 1667804699 "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex" "main.pdf" "main" 1667804700
   "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1666690284 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1666690267 10788011 083f97815df21d6cae68fd4a057ef8a3 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -20,11 +20,13 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti12.tfm" 1136765053 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247593066 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247593067 36741 0ee9e374ec3e30da87cdfb0ea3575226 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247593067 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247593067 32726 39f0f9e62e84beb801509898a605dbd5 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247593067 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247593067 36118 fad905eba93cff5bce1e185fe980a177 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/amsfonts.sty" 1358197772 5949 3f3fd50a8cc94c3d4cbf4fc66cd3df1c ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/amssymb.sty" 1358197772 13829 94730e64147574077f8ecfea9bb69af4 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsa.fd" 1358197772 961 6518c6525a34feb5e8250ffa91731cff ""
@@ -34,9 +36,9 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1664385028 30426 b4bd1ea7df6c51902df8edf551809fb7 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/tree-dvips/lingmacros.sty" 777845323 9506 61acecab9b335babd29e060f0011610b ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/tree-dvips/tree-dvips.sty" 800658147 8552 b7db3c0732f761d31db398a8f3dca316 ""
-  "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex" 1667469273 1654 860427520d87fdb1adbb5265d642b07e ""
-  "main.aux" 1667469275 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
-  "main.tex" 1667469273 1654 860427520d87fdb1adbb5265d642b07e ""
+  "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - Z/series 2/4-supervez/tex/main.tex" 1667804697 2043 b6a0e13f513394ac4e9f014816ff0c4c ""
+  "main.aux" 1667804699 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.tex" 1667804697 2043 b6a0e13f513394ac4e9f014816ff0c4c ""
   (generated)
   "main.aux"
   "main.log"
