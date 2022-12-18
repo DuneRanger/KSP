@@ -1,0 +1,73 @@
+\documentclass{../../../ksp}
+
+\title{KSP 35-H-2-2}
+\author{Daniel Culliver}
+\date{Prosinec 2022}
+
+\algnewcommand{\LineComment}[1]{\Statex \(\triangleright\) #1}
+
+\begin{document}
+
+\maketitle
+
+\section*{Řešení}
+
+Ze zadání vímě, že musíme pracovat s binární haldou.
+Začneme tedy nejjednodušším řešením a to je postupné nalezení a odebírání nejemnšího prvku,
+dokud nezískáme K jako kořen haldy. Toto je vlastně (pravděpodobně) ten algoritmus využitý na té přednášce
+a v tomto případě by měl časovou komplexitu $\BigO(K \log{N})$.
+Protože máme zaručeno, že \emph{K} je řádově menší než \emph{N}, nemusíme řešit případ,
+kde by bylo rychlejší hledat od největšího prvku a můžeme se soustředit na hledání nejnižšího.
+
+
+I přes to, že komplexita $\BigO(K \log{N})$ není vůbec špatná, určitě se dá zlepšít. Hlavně, v rámci
+$\BigO$ notaci ztratíme veškeré konstanty, a protože celá komplexita programu pravděpodobně
+(zatím předpokládám) bude větší než $\BigO(\log{N})$, většina optimalizací budou v počtu kroků v algoritmu.
+
+Jako první pokus o řešení, zkusím napsat algoritmus, který bude hledat K-tý nejnižší prvek v binárním haldě,
+bez toho, abych pokaždé odstranil nejnižší prvek a hledal nový kořen.
+
+\begin{algorithm}
+    \caption{Hledání K-tého nejnižší členu}
+    \begin{algorithmic}[1]
+        \Require{\emph{K}, \emph{heap}}             
+            \State $savedVals[] \gets ordered\ array$ \Comment{An array of ordered, saved values}
+            \State Insert \emph{heap[1]} into \emph{savedVals} 
+            \State $curInd \gets 1$ \Comment{Indexing from 1}
+            \LineComment{Refers to the index of the last "stable" value in \emph{savedVals}}
+            \While{\emph{K} > \emph{curInd}}
+                \If{\emph{savedVals[curInd]} has children nodes}
+                    \State \emph{BinaryInsert}(\emph{savedVals},\ start: \emph{curInd+1},\ value: \emph{savedVals[curInd].leftChild})
+                    \State \emph{BinaryInsert}(\emph{savedVals},\ start: \emph{curInd+1},\ value: \emph{savedVals[curInd].rightChild})
+                    \LineComment{A slightly modified binary search for the correct range to which it can put the value}
+                    \LineComment{This will always have $\BigO(\log{N})$ and $\Omega(\log{N})$ complexity}
+                \EndIf
+                \State $curInd \gets curInd+1$
+            \EndWhile
+        \Ensure{savedVals[K]}
+    \end{algorithmic}
+\end{algorithm}
+
+Teď se pokusím algoritmus vysvětlit.
+
+Máme poli \emph{savedVals}, který na začátku jenom kořen haldy.
+Víme, že je na správném místě (je to nejmenší prvek na místě 1) a přidáme jeho potomky pomocí upraveného binary search,
+který věřím je dost triviálně upravený, že nemusím dokazovat jeho komplexitu.
+Protože jsme věděli, že předchozí prvek byl na správném místě, ten binaryInsert mohl začít od náseldujícího indexu.
+Tímhle skončí první cyklus algoritmu.
+
+Na následujícím cyklu je nejmenší prvek na indexu o jeden větší, ten máme zase zaručený, že je na správném místě
+a opět přidáme jeho potomky pomocí \emph{binaryInsert}.
+V případě že nejmenší prvek nemá žádné potomky, tak se jenom zmenší oblast \emph{nestabilních} čísel (t.j. čísla, která nemusí být na správné pozici).
+To je pro algoritmus jenom výhodné, takže to zanedbáme při počítání $\BigO$ komplexity.
+
+V případě, že každý prvek v \emph{savedVals} má potomky, na každém kroku přidáme 2 \emph{nestabilní} prvky,
+ale jeden předchozí \emph{nestabilní} prvek se stane \emph{stabilní}.
+To znamená, že na každém kroku získáme 1 \emph{stabilní} prvek a oblast \emph{nestabilních} prvků se zvýšší o 1.
+A protože skončíme první cyklus algoritmu s jedním \emph{stabilním} prvek a dvěma \emph{nestabilními} prvky,
+je zřejmé, provedeme \emph{K} cyklů, abychom našli \emph{K}-tý prvek a oblast \emph{nestabilních} prvků bude mít velikost \emph{K+1}
+Tedy nejvýše $K$ krát provedeme $2\log{K}$, což vychází jako $\BigO(K \log{K})$.
+
+\end{document}
+
+\templatecredit

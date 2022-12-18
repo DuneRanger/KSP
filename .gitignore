@@ -29,7 +29,9 @@
 # Executables
 *.exe
 *.out
+*.in
 *.app
 
 node_modules/
 .gitignore
+.config

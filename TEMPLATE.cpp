@@ -5,7 +5,6 @@
 #include <map>
 #include <algorithm>
 #include <chrono>
-using namespace std;
 
 /*
     return a < b ? -1 : a > b ? 1 : 0
@@ -31,10 +30,10 @@ int compare(char a, char b) {
     return a < b ? -1 : a > b ? 1 : 0;
 }
 
-int compare(string a, string b) {
+int compare(std::string a, std::string b) {
     int result = 0;
     int ind = 0;
-    while (result == 0 && ind < min(a.size(), b.size())) {
+    while (result == 0 && ind < std::min(a.size(), b.size())) {
         result = a[ind] < b[ind] ? -1 : a[ind] > b[ind] ? 1 : 0;
         ind++;
     }
@@ -46,7 +45,7 @@ int compare(string a, string b) {
     Works for 1D arrays of any type
 */
 template <typename T>
-int BinaryArraySearch(vector<T> arr, int left, int right, T val) {
+int BinaryArraySearch(std::vector<T> arr, int left, int right, T val) {
     int found = -1;
     int middle = (left+right)/2;
     while (left <= right) {
@@ -65,18 +64,23 @@ int BinaryArraySearch(vector<T> arr, int left, int right, T val) {
 }
 
 int main() {
-    string fileDir = "./inOut/test";
-    ifstream inputFile;
-    ofstream outputFile;
+    using std::cout;
+    using std::string;
+    using std::vector;
+    using std::endl;
 
-    inputFile.open(fileDir + ".in", ios::in);
+    string fileDir = "./inOut/test";
+    std::ifstream inputFile;
+    std::ofstream outputFile;
+
+    inputFile.open(fileDir + ".in", std::ios::in);
 
     uint64_t answer = 0;
     int inpLen;
     inputFile >> inpLen;
 
 
-    outputFile.open(fileDir + ".out", ios::out);
+    outputFile.open(fileDir + ".out", std::ios::out);
     outputFile << answer;
     outputFile.close();
 }
