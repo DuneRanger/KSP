@@ -6,6 +6,15 @@
 #include <algorithm>
 #include <chrono>
 
+std::string fileDir = "./inOut/test";
+std::ifstream inputFile(fileDir+".in");
+std::ofstream outputFile(fileDir+".out");
+
+#define in inputFile
+#define out outputFile
+#define in std::cin
+#define out std::cout
+
 /*
     return a < b ? -1 : a > b ? 1 : 0
     @param int|double|float|uint64_t|char|string
@@ -49,7 +58,7 @@ int BinaryArraySearch(std::vector<T> arr, int left, int right, T val) {
     int found = -1;
     int middle = (left+right)/2;
     while (left <= right) {
-        cout << left << " " << middle << " " << right << endl;
+        std::cout << left << " " << middle << " " << right << std::endl;
         if (compare(arr[middle], val) == 0) {
             found = middle;
             right = middle-1;
@@ -64,23 +73,15 @@ int BinaryArraySearch(std::vector<T> arr, int left, int right, T val) {
 }
 
 int main() {
-    using std::cout;
     using std::string;
     using std::vector;
     using std::endl;
-
-    string fileDir = "./inOut/test";
-    std::ifstream inputFile;
-    std::ofstream outputFile;
-
-    inputFile.open(fileDir + ".in", std::ios::in);
+    using std::cout;
 
     uint64_t answer = 0;
     int inpLen;
-    inputFile >> inpLen;
+    in >> inpLen;
 
 
-    outputFile.open(fileDir + ".out", std::ios::out);
-    outputFile << answer;
-    outputFile.close();
+    out << answer;
 }

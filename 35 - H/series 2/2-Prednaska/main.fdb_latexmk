@@ -1,14 +1,14 @@
-# Fdb version 3
-["pdflatex"] 1671390344 "d:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 2/2-Prednaska/main.tex" "main.pdf" "main" 1671390347
+# Fdb version 4
+["pdflatex"] 1672821165 "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 2/2-Prednaska/main.tex" "main.pdf" "main" 1672821167 0
   "../../../ksp.cls" 1671390342 2094 bcae7a8365170e6a3ccc17d3504b8830 ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1671118238 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1671118894 28976 56b1a68af0070df9c482916a2f02cbd3 ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1728.pk" 1671118241 49100 8a1972ecb4766b305218816a025427e2 ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0900.pk" 1671120683 21356 ce3b511abdd9be32df5f80a7c4b896ac ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1095.pk" 1668947447 26228 fd81c68726411ff2381b6fbcf71668de ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1440.pk" 1671118242 34320 9bbb71e810fb8deaf90aaac1ee3653aa ""
-  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1095.pk" 1671118508 35204 67026ebf26c602135abf3451281102b6 ""
-  "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1666958791 10788011 da887fc7697624c55979e8576dd55ed8 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1672821143 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1672821147 28976 8cff21b0da58542532c7bdaa68b9f023 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1728.pk" 1672821149 49100 f4d9de660cc815f5ed5648b7bf4bc549 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0900.pk" 1672821162 21356 3286c4c35509a493fe8124881b598c15 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1095.pk" 1672821153 26228 8760241bcac676ca3ae6e4e45b41bb67 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1440.pk" 1672821151 34320 74eb420c42385f2c3c182bc70c71602b ""
+  "C:/Users/danie/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1095.pk" 1672821164 35204 38e104629e705af17e3290f6525d8957 ""
+  "C:/Users/danie/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1672821014 10788009 5483e198cce35d75ec60a9b36b590b19 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1095.tfm" 993058356 3228 aacd2ac2d814480e4422ad7e830fd2d4 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1440.tfm" 993058360 3196 0b37fa3083e15c57cfa8c4ff52f2807a ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1728.tfm" 993058362 3204 d35cb76836b6cb4ed404dd64a550530d ""
@@ -173,12 +173,13 @@
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/danie/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
-  "d:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 2/2-Prednaska/main.tex" 1670941713 4285 bce95573e8a16625bdcc10209cbc5a53 ""
-  "main.aux" 1671390347 824 1b385f81cb3627d27c68ee1bfd28731a "pdflatex"
-  "main.out" 0 -1 0 "pdflatex"
+  "c:/Users/danie/OneDrive/Personal-projects/Coding/GitHub/KSP/35 - H/series 2/2-Prednaska/main.tex" 1670941713 4285 bce95573e8a16625bdcc10209cbc5a53 ""
+  "main.aux" 1672821167 824 1b385f81cb3627d27c68ee1bfd28731a "pdflatex"
+  "main.out" 1672821167 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "main.tex" 1670941713 4285 bce95573e8a16625bdcc10209cbc5a53 ""
   (generated)
   "main.aux"
   "main.log"
   "main.out"
   "main.pdf"
+  (rewritten before read)

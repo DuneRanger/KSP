@@ -1,6 +1,6 @@
-PWD d:\Users\danie\OneDrive\Personal-projects\Coding\GitHub\KSP\35 - H\series 2\2-Prednaska
+PWD c:\Users\danie\OneDrive\Personal-projects\Coding\GitHub\KSP\35 - H\series 2\2-Prednaska
 INPUT C:\Users\danie\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\Users\danie\OneDrive\Personal-projects\Coding\GitHub\KSP\35 - H\series 2\2-Prednaska\main.tex
+INPUT c:\Users\danie\OneDrive\Personal-projects\Coding\GitHub\KSP\35 - H\series 2\2-Prednaska\main.tex
 OUTPUT main.log
 INPUT ..\..\..\ksp.cls
 INPUT ..\..\..\ksp.cls
