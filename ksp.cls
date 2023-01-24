@@ -2,7 +2,7 @@
 % Shared under the MIT license
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ksp}[2022/03/16 A template for KSP theoretical exercises]
+% \ProvidesClass{ksp}[2022/03/16 A template for KSP theoretical exercises]
 \ProvidesClass{../../../ksp}[2022/03/16 A template for KSP theoretical exercises]
  
 \LoadClass[a4paper, 11pt, fleqn]{article}
