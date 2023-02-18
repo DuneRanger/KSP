@@ -5,8 +5,9 @@
 #include <map>
 #include <algorithm>
 #include <chrono>
+#include <queue>
 
-std::string fileDir = "./inOut/test";
+std::string fileDir = "./inOut/02";
 std::ifstream inputFile(fileDir+".in");
 std::ofstream outputFile(fileDir+".out");
 
@@ -16,72 +17,22 @@ std::ofstream outputFile(fileDir+".out");
 // #define out std::cout
 
 struct lid {
-    std::vector<std::pair<int, int>> differences; //value and index
+    int num;
+    std::vector<std::pair<int, int>> possBoxes; //amount and index in boxes[]
     int originalInd;
     int newInd;
 };
 
 struct box {
+    int num;
     int amount;
     bool hasLid;
-    lid lidRef;
-    std::vector<lid> possLids;
-    // std::vector<int> lidSums;
+    lid* lidRef;
+    std::vector<std::pair<lid*, int>> possLids; //lid and index in lids[]
 };
 
 std::vector<box> boxes;
 std::vector<lid> lids;
-
-void assignLidToBox(int ind) {
-    // //This can never happen, right?
-    // if (lids[ind].differences.size() == 1) { std::cout << "WTF"; return; }
-    // if (boxes[lids[ind].differences[0].second].lidRef.differences.size() == 1) { std::cout << "ALSOWHAT"; return; }
-    std::cout << "lid " << lids[ind].originalInd << std::endl;
-    //Has to finish before reaching the condition
-    for (int i = 0; i < lids[ind].differences.size(); i++) {
-        if (i == lids[ind].differences.size()-1) {
-            boxes[lids[ind].differences[i].second].hasLid = true;
-            boxes[lids[ind].differences[i].second].lidRef = lids[ind];
-            boxes[lids[ind].originalInd].hasLid = false;
-            // boxes[lids[ind].originalInd].lidRef = null;
-            lids[ind].newInd = lids[ind].differences[i].second;
-            return;
-        }
-
-        lid otherLid = boxes[lids[ind].differences[i].second].lidRef;
-        int indOther = -1;
-
-        //Again, shouldn't ever hit .size()
-        for (int j = 0; j < otherLid.differences.size(); j++) {
-            if (otherLid.differences[j].second == lids[ind].differences[i].second) {
-                indOther = j;
-                break;
-            }
-        }
-        std::cout << (boxes[lids[ind].differences[i].second].amount - boxes[lids[ind].differences[i+1].second].amount) << " ";
-        std::cout << (boxes[otherLid.differences[indOther].second].amount - boxes[otherLid.differences[indOther+1].second].amount) << std::endl;
-        
-        std::cout << (boxes[lids[ind].differences[i].second].amount - boxes[lids[ind].differences[i+1].second].amount
-        > boxes[otherLid.differences[indOther].second].amount - boxes[otherLid.differences[indOther+1].second].amount) << std::endl;
-
-        //Add condition, so that indOther == 0
-        if (boxes[lids[ind].differences[i].second].amount - boxes[lids[ind].differences[i+1].second].amount
-        > boxes[otherLid.differences[indOther].second].amount - boxes[otherLid.differences[indOther+1].second].amount) {
-            int otherLidInd = -1;
-            for (int j = 0; j < lids.size(); j++) {
-                if (otherLid.originalInd == lids[i].originalInd) {
-                    otherLidInd = j;
-                }
-            }
-
-            boxes[otherLid.differences[indOther].second].lidRef = lids[ind];
-
-            assignLidToBox(otherLidInd);
-            return;
-        }
-    }
-
-}
 
 
 int main() {
@@ -90,7 +41,6 @@ int main() {
     using std::endl;
     using std::cout;
 
-    uint64_t answer = 0;
     int boxNum, ropeLen;
     in >> boxNum >> ropeLen;
 
@@ -98,24 +48,33 @@ int main() {
     for (int i = 0; i < boxNum; i++) {
         box temp;
         in >> temp.amount >> temp.hasLid;
+        temp.num = i;
         if (temp.hasLid) {
             lid temp2;
             temp2.originalInd = i;
+            temp2.newInd = i;
             lids.push_back(temp2);
-            temp.lidRef = temp2;
+            temp.lidRef = &lids[lids.size()-1];
         }
         boxes.push_back(temp);
     }
 
     for (int i = 0; i < lids.size(); i++) {
         for (int j = std::max(lids[i].originalInd-ropeLen, 0); j < std::min(lids[i].originalInd+ropeLen+1, boxNum); j++) {
-            // boxes[j].possLids.push_back(lids[i]);
-            lids[i].differences.push_back(std::make_pair(boxes[j].amount - boxes[lids[i].originalInd].amount, j));
+            lids[i].possBoxes.push_back(std::make_pair(boxes[j].amount, j));
         }
+        lids[i].num = i;
     }
 
     for (int i = 0; i < lids.size(); i++) {
-        std::sort(lids[i].differences.begin(), lids[i].differences.end(), [](std::pair<int, int> p1, std::pair<int, int> p2) {
+        for (int j = std::max(lids[i].originalInd-ropeLen, 0); j < std::min(lids[i].originalInd+ropeLen+1, boxNum); j++) {
+            boxes[j].possLids.push_back(std::make_pair(&lids[i], i));
+        }
+    }
+
+
+    for (int i = 0; i < lids.size(); i++) {
+        std::sort(lids[i].possBoxes.begin(), lids[i].possBoxes.end(), [&](std::pair<int, int> p1, std::pair<int, int> p2) {
             return p1.first > p2.first;
         });
     }
@@ -129,21 +88,84 @@ int main() {
                     break;
                 }
             }
-            boxes[i].lidRef = lids[ind];
+            boxes[i].lidRef = &lids[ind];
         }
     }
 
+
+    std::deque<int> lidQueue;
+
     for (int i = 0; i < lids.size(); i++) {
-        if (boxes[lids[i].differences[0].second].hasLid && boxes[lids[i].differences[0].second].lidRef.originalInd != lids[i].originalInd) {
-            assignLidToBox(i);
+        lidQueue.push_back(i);
+    }
+    for (int i = 0; i < boxNum; i++) {
+        out << boxes[i].amount << " " << boxes[i].hasLid << " " << (boxes[i].hasLid ? (*boxes[i].lidRef).originalInd : -1) << endl;
+    }
+    out << endl;
+
+
+    while (!lidQueue.empty()) {
+        for (int i = 0; i < lidQueue.size(); i++) {
+            out << lids[lidQueue[i]].originalInd << " ";
         }
-        else {
-            boxes[lids[i].originalInd].hasLid = false;
-            boxes[lids[i].differences[0].second].hasLid = true;
-            boxes[lids[i].differences[0].second].lidRef = lids[i];
-            // boxes[lids[i].originalInd].lidRef = null;
-            lids[i].newInd = lids[i].differences[0].second;
+        out << endl << lids[lidQueue.front()].originalInd << ":" << endl;
+
+        lid* curLid = &lids[lidQueue.front()];
+        lidQueue.pop_front();
+        box* tBox = &boxes[(*curLid).possBoxes[0].second];
+
+        out << curLid->originalInd << " " << tBox->amount << " " << tBox->possLids.size() << " " << "" << endl;
+    
+
+        // if (curLid->newInd)
+
+        for (int i = 0; i < (*tBox).possLids.size(); i++) {
+            int tempInd = -1;
+            for (int j = 0; j < (*(*tBox).possLids[i].first).possBoxes.size(); j++) {
+                if ((*(*tBox).possLids[i].first).possBoxes[j].second == (*tBox).num) {
+                    tempInd = j;
+                    break;
+                }
+            }
+            // cout << i << " " << tempInd << " " << (*tBox).possLids.size() << endl;
+            // out << curLid->originalInd << (*tBox).possLids[i].first->originalInd << (*tBox).possLids.size() << endl;
+            
+            if (tempInd == (*(*tBox).possLids[i].first).possBoxes.size()-1) continue;
+            if ((*tBox).possLids[i].first->originalInd == curLid->originalInd) continue;
+
+
+            out << (*tBox).amount << " " << (*(*tBox).possLids[i].first).possBoxes[tempInd+1].first << " "
+            << " " << (*curLid).possBoxes[1].first << endl;
+
+            if ((*(*tBox).possLids[i].first).possBoxes[tempInd+1].first <= (*curLid).possBoxes[1].first) {
+                    for (int j = 0; j < (*(*tBox).possLids[i].first).possBoxes.size(); j++) {
+                        out << (*(*tBox).possLids[i].first).possBoxes[j].second << " ";
+                    }
+                    out << endl;
+                    (*(*tBox).possLids[i].first).possBoxes.erase((*(*tBox).possLids[i].first).possBoxes.begin()+tempInd);
+                    
+                    for (int j = 0; j < (*(*tBox).possLids[i].first).possBoxes.size(); j++) {
+                        out << (*(*tBox).possLids[i].first).possBoxes[j].second << " ";
+                    }
+                    (*tBox).possLids.erase((*tBox).possLids.begin()+i);
+                    i--;
+                    out << endl;
+                    out << endl;
+            }
         }
+        if ((*tBox).hasLid && (*(*tBox).lidRef).originalInd != (*curLid).originalInd) {
+            int oldLidInd = (*(*tBox).lidRef).num;
+            lidQueue.push_front(oldLidInd);
+        }
+        (*(*tBox).lidRef).newInd = -1;
+        if ((*curLid).newInd != -1) boxes[(*curLid).newInd].hasLid = false;
+        (*tBox).hasLid = true;
+        (*tBox).lidRef = &(*curLid);
+        (*curLid).newInd = (*tBox).num;
+        for (int i = std::max((*curLid).originalInd-ropeLen-5, 0); i < std::min((*curLid).originalInd+ropeLen+6, boxNum); i++) {
+            out << boxes[i].amount << " " << boxes[i].hasLid << " " << (boxes[i].hasLid ? (*boxes[i].lidRef).originalInd : -1) << endl;
+        }
+        out << endl;
     }
 
     int sum = 0;
@@ -154,7 +176,8 @@ int main() {
     out << sum << endl;
 
     for (int i = 0; i < lids.size(); i++) {
-        out << lids[i].originalInd << " " << lids[i].newInd << endl;
+        // cout << lids[i].originalInd << " " << lids[i].newInd << endl;
+        out << (lids[i].originalInd+1) << " " << (lids[i].newInd+1) << endl;
     }    
 
     // out << answer;

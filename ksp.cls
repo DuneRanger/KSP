@@ -15,6 +15,7 @@
 \RequirePackage{algorithm}% http://ctan.org/pkg/algorithm
 \RequirePackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
 \RequirePackage{amsthm, amsmath, amssymb} % math, math, math
+\RequirePackage{bm}
 \RequirePackage{xcolor} % colors!
 \RequirePackage{tikz, wrapfig} % drawing
 \RequirePackage[top=1in, bottom=1.25in, left=1.1in, right=1.1in]{geometry} % page spacing

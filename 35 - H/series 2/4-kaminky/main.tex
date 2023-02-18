@@ -1,7 +1,7 @@
 % \documentclass{ksp}
 \documentclass{../../../ksp}
 
-\title{KSP 35-H-2-2}
+\title{KSP 35--2--2}
 \author{Daniel Culliver}
 \date{Prosinec 2022}
 
@@ -40,20 +40,20 @@ Ještě ukážu algoritmus v pseudokodu:
 
 \begin{algorithm*}
     \begin{algorithmic}
-        \Require{$cols$ - sequence of colours }
-        \State $saved[] \gets array of saved colours$
+        \Require{$cols$ --- sequence of colours }
+        \State{$saved[] \gets array of saved colours$}
         \For{every $colour$ in $cols$}
             \If{$colour$ is equal to $saved[last value]$}
-                \State remove $saved[last value]$ from $saved$
-            \Else
-                \State add $colour$ to $saved$
-            \EndIf
-        \EndFor
+                \State{remove $saved[last value]$ from $saved$}
+            \Else{}
+                \State{add $colour$ to $saved$}
+            \EndIf{}
+        \EndFor{}
         \If{$saved$ is empty}
-            \State return true
-        \Else
-            \State return false
-        \EndIf
+            \State{return true}
+        \Else{}
+            \State{return false}
+        \EndIf{}
         \Ensure{Whether or not the input is solveable}
     \end{algorithmic}
 \end{algorithm*}

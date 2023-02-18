@@ -5,6 +5,7 @@
 #include <map>
 #include <algorithm>
 #include <chrono>
+#include <queue>
 
 std::string fileDir = "./inOut/test";
 std::ifstream inputFile(fileDir+".in");

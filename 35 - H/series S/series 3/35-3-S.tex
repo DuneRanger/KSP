@@ -1,0 +1,304 @@
+% \documentclass{ksp}
+\documentclass{../../../ksp}
+
+\title{KSP 35-3-S}
+\author{Daniel Culliver}
+\date{Únor 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Úkol 1 – Matice přechodu [7b]}
+
+Známe tedy bázi $B: 1, x, x^2$ a $C: c_1, c_2, c_3$, které jsou součástí prostoru $Q$, což je množinou všech kvadratických funkcí.
+Zároveň také známe jak vypadají $\bm{c}_1, \bm{c}_2$ a $\bm{c}_3$ v kanonické bázi:
+\begin{equation}
+    \begin{split}        
+        \bm{c}_1(x) & = \frac{1}{2}x(x-1) = \frac{1}{2}x^2 - \frac{1}{2}x \\
+        \bm{c}_2(x) & = -(x+1)(x-1) = -x^2 + 1 \\
+        \bm{c}_3(x) & = \frac{1}{2}x(x+1) = \frac{1}{2}x^2 + \frac{1}{2}x
+    \end{split}
+\end{equation}
+Tudíž nejprve začneme jednoduchým převodem těchto vektorů do bázi $B$.
+
+Vektory v bázi $B$ vypadají takto:
+\begin{equation}
+    \bm{v} =
+    \begin{pmatrix}
+        c\\
+        b\\
+        a
+    \end{pmatrix}
+\end{equation}
+
+Takže bez žádného zbytečného myšlení převedeme vektory  $\bm{c}_1, \bm{c}_2$ a $\bm{c}_3$ do bázi $B$:
+\begin{equation}
+        [\bm{c}_1]_B =
+        \begin{pmatrix}
+            0\\
+            -\frac{1}{2}\\
+            \frac{1}{2}
+        \end{pmatrix}
+        \qquad
+        [\bm{c}_2]_B =
+        \begin{pmatrix}
+            1\\
+            0\\
+            -1
+        \end{pmatrix}
+        \qquad
+        [\bm{c}_3]_B =
+        \begin{pmatrix}
+            0\\
+            \frac{1}{2}\\
+            \frac{1}{2}
+        \end{pmatrix}
+\end{equation}
+
+Tudíž transformační matice z báze $C$ do $B$ $_B[id]_C$ stačí jen vypsat:
+
+\begin{equation}
+    _B[id]_C = 
+    \begin{pmatrix}
+        0 & 1 & 0\\
+        -\frac{1}{2} & 0 & \frac{1}{2}\\
+        \frac{1}{2} & -1 & \frac{1}{2}
+    \end{pmatrix}
+\end{equation}
+
+Tedy k výpočtu matice $_B[g]_B$ potřebujeme už jenom matici $_C[id]_B$.
+Nejdřív stanovíme $\bm{b}_1, \bm{b}_2$ a $\bm{b}_3$:
+\begin{equation}
+    [\bm{b}_1]_B =
+    \begin{pmatrix}
+        1\\
+        0\\
+        0
+    \end{pmatrix}
+    \qquad
+    [\bm{b}_2]_B =
+    \begin{pmatrix}
+        0\\
+        1\\
+        0
+    \end{pmatrix}
+    \qquad
+    [\bm{b}_3]_B =
+    \begin{pmatrix}
+        0\\
+        0\\
+        1
+    \end{pmatrix}
+\end{equation}
+
+které jednoduše převodíme do kanonické bázi:
+
+\begin{equation}
+    \bm{b}_1 = 1
+    \qquad
+    \bm{b}_2 = x
+    \qquad
+    \bm{b}_3 = x^2
+\end{equation}
+
+Tentokrát na převod těchto vektorů do bázi $C$ musíme sledovat jejich hodnoty v bodech
+$x = -1, x = 0$ a $x = 1$, což opět jednoduše vypočítáme jako:
+
+\begin{equation}
+    [\bm{b}_1]_C =
+    \begin{pmatrix}
+        1\\
+        1\\
+        1
+    \end{pmatrix}
+    \qquad
+    [\bm{b}_2]_C =
+    \begin{pmatrix}
+        -1\\
+        0\\
+        1
+    \end{pmatrix}
+    \qquad
+    [\bm{b}_3]_C =
+    \begin{pmatrix}
+        1\\
+        0\\
+        1
+    \end{pmatrix}
+\end{equation}
+
+Tedy transformační matice z báze $B$ do $C$ $_C[id]_B$ je:
+
+\begin{equation}
+    _C[id]_B = 
+    \begin{pmatrix}
+        1 & -1 & 1\\
+        1 & 0 & 0\\
+        1 & 1 & 1
+    \end{pmatrix}
+\end{equation}
+
+Pro výpočet matice $_B[g]_B$ stačí už jen dosadit:
+
+\begin{equation}
+    \begin{split}
+        _B[g]_B & =\ _B[id]_C\ \cdot\ _C[g]_C\ \cdot\ _C[id]_B \\
+        _B[g]_B & = 
+        \begin{pmatrix}
+            0 & 1 & 0\\
+            -\frac{1}{2} & 0 & \frac{1}{2}\\
+            \frac{1}{2} & -1 & \frac{1}{2}
+        \end{pmatrix}
+        \cdot
+        \begin{pmatrix}
+            0 & 0 & 1\\
+            0 & 1 & 0\\
+            1 & 0 & 0
+        \end{pmatrix}
+        \cdot 
+        \begin{pmatrix}
+            1 & -1 & 1\\
+            1 & 0 & 0\\
+            1 & 1 & 1
+        \end{pmatrix} \\
+        _B[g]_B & = 
+        \begin{pmatrix}
+            0 & 1 & 0\\
+            \frac{1}{2} & 0 & -\frac{1}{2}\\
+            \frac{1}{2} & -1 & \frac{1}{2}
+        \end{pmatrix}
+        \cdot 
+        \begin{pmatrix}
+            1 & -1 & 1\\
+            1 & 0 & 0\\
+            1 & 1 & 1
+        \end{pmatrix} \\
+        _B[g]_B & = 
+        \begin{pmatrix}
+            1 & 0 & 0\\
+            0 & -1 & 0\\
+            0 & 0 & 1
+        \end{pmatrix} \\
+    \end{split}
+\end{equation}
+
+Teď si řekneme jak jsme tuto matici mohli vymyslet bez těchto výpočtů.
+$g$ je zadefinované jako zobrazení, které zrcadlově převrátí funkci podle osy y.
+Toto se napíše jako $g(x) = f(-x)$, což se u kvadratické funkce projeví tak, že z
+$ax^2 + bx + c$ stane $ax^2 - bx + c$.
+Tedy členy $a$ a $c$ zůstanou stejné a $b$ se vynásobí $-1$, což naše matice $_B[g]_B$,
+kterou jsme vypočítali dělá.
+
+
+\section*{Úkol 2 – Soustavy pomocí maticových prostorů [5b]}
+
+Nejprve máme rozhodnout, kolik řešení má soustava $\bm{Ax}=\bm{b}$.
+Tato soustava se dá přepsat jako:
+\begin{equation}
+    x_1\bm{a}_1 + x_2\bm{a}_2 + \cdots + x_n\bm{a}_n = \bm{b}
+\end{equation}
+Což se dá napsat jako rozšířenu matici:
+\begin{equation}
+    \begin{pmatrix}
+        \bm{a}_1 & \bm{a}_2 & \cdots & \bm{a}_n & \bigm| & \bm{b}
+    \end{pmatrix}
+\end{equation}
+Kde pravá strana se ve finále bude rovnat $\bm{x}$.
+
+Z tohohle vychází, že aby rovnice $\bm{Ax}=\bm{b}$ měla řešení,
+$\bm{b}$ musí být lineární kombinací sloupcových vektorů matice $\bm{A}$
+
+Tudíž v případě že ta rozšířená bude mít řešení, bude mít řešení právě jedno.
+To ale neznamená, že i rovnice $\bm{Ax}=\bm{b}$ bude mít také jenom jedno řešení.
+Známe totiž bázi ker($\bm{A}$) ze kterého můžeme sestavit celou množinu ker($\bm{A}$).
+Protože násobením jakéhokoliv členu množiny ker($\bm{A}$) s maticí $\bm{A}$ získáme nulový vektor,
+můžeme tedy přidat jakýkoliv vektor z této množiny k vektoru $\bm{x}$ aniž bychom změnili výsledný vektor.
+
+To tedy vyjde tak, že počet řešení této rovnice je rovný velikostí ker($\bm{A}$), kde nulový vektor $\bm{0}$
+můžeme přiřadit k půvdonímu vektoru $\bm{x}$ a ostatní řešení samozřejmě k příslušným lineárním kombinacím, které se nachází v
+ker($\bm{A}$).
+
+Ve finále, rovnice $\bm{Ax}=\bm{b}$ buď nemá řešení, má právě jedno (když ker($\bm{A}$) obsahuje pouze $\bm{0}$)
+nebo nekonečně mnoho (počet všech lineárních kombinací bázi ker($\bm{A}$)).
+Pokud známe jedno řešení $\bm{x}_0$, můžeme množinu řešení zapsat takto:
+\begin{equation}
+    \{ \bm{x}_0 + \bm{v} \bigm| \bm{Ax} = \bm{b} \land \bm{v} \in ker(\bm{A}) \}
+\end{equation}
+
+\section*{Úkol 3 – Rekurence [3b]}
+
+Řešení tohoto problému je velmi podobný řešením Fibonacciho pousloupnosti v minulém sérii.
+Můžeme nahlédnout, že $F_{n+2} = F_{n+1} + F_n$ je dost podobné našé nové pousloupnosti
+$s_{n+2} = 2s_{n+1} + 3s_n$. Je tedy už zřejmé, že můžeme velmi jednoduše postavit matici, stejně jako pro Fibonacciho řady:
+
+\begin{equation}
+    \begin{pmatrix}
+        s_{n+1}\\
+        s_{n+2}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1\\
+        3 & 2
+    \end{pmatrix}
+    \begin{pmatrix}
+        s_{n}\\
+        s_{n+1}
+    \end{pmatrix}
+\end{equation}
+Vyzkoušíme tento vzorec pro $s_0$ a $s_1$ a máme rovnou důkaz indukcí:
+\begin{equation}
+    \begin{pmatrix}
+        0 & 1\\
+        3 & 2
+    \end{pmatrix}
+    \begin{pmatrix}
+        s_{0}\\
+        s_{1}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1\\
+        3 & 2
+    \end{pmatrix}
+    \begin{pmatrix}
+        0\\
+        1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        1\\
+        2
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        s_{1}\\
+        s_{2}
+    \end{pmatrix}
+\end{equation}
+
+Tedy:
+
+\begin{equation}
+    \begin{pmatrix}
+        s_{n-1}\\
+        s_{n}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 & 1\\
+        3 & 2
+    \end{pmatrix}
+    ^n
+    \begin{pmatrix}
+        s_{0}\\
+        s_{1}
+    \end{pmatrix}
+\end{equation}
+
+Což, jestli chápu ten pojem správně, je explicitním vzorcem této geometrické řady.
+Do této vzorce stačí definovat $s_0$ a $s_1$ a následně můžeme vypočítat jakýkoliv člen posloupnosti, která je daná
+rekurentním vztahem $s_{n+2} = 2s_{n+1} + 3s_n$.
+
+\end{document}
