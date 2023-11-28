@@ -1,0 +1,190 @@
+\documentclass{../../../../ksp}
+\usepackage{fancyvrb}
+
+\title{KSP 36-S-1}
+\author{Daniel Culliver}
+\date{Listopad 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Postup k řešení}
+
+Nejdřív si napíšu oběcný vstup, aby bylo jasný co znamená která proměnná:
+
+\begin{Verbatim}[commandchars=\\\{\}, codes={\catcode`$=3\catcode`_=8}]
+    n f
+    $w_1$, $w_2$ \dots $w_f$, $w_{f+1}$
+    $x_{1,1}$, $x_{2,1}$ \dots $x_{f,1}$, $x_{f+1,1}$
+    $x_{1,2}$, $x_{2,2}$ \dots $x_{f,2}$, $t_{2}$
+    \dots
+    $x_{1,n}$, $x_{2,n}$ \dots $x_{f,n}$, $t_{n}$
+\end{Verbatim}
+
+Víme, že $p_1 = x_{1,1} \cdot w_{1} + x_{1,2} \cdot w_{2} + \dots + x_{1,f} \cdot w_{f} + 1 \cdot w_{f+1}$, tedy:
+\begin{gather*}
+    \begin{pmatrix}
+        x_{1,1} & x_{1,2} & \cdots & x_{1,f} & 1\\
+        x_{2,1} & x_{2,2} & \cdots & x_{2,f} & 1\\
+        \vdots & \vdots & \ddots & \vdots & \vdots\\
+        x_{n,1} & x_{n,2} & \cdots & x_{n,f} & 1\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        w_{1}\\
+        w_{2}\\
+        \vdots\\
+        w_{f+1}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        p_{1}\\
+        p_{2}\\
+        \vdots\\
+        p_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+A podle úprav v zadání víme, že toto ověřuje $w_1$:
+
+\begin{gather*}
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}
+    \end{pmatrix}
+    \begin{pmatrix}
+        p_{1}\\
+        p_{2}\\
+        \vdots\\
+        p_{n}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}
+    \end{pmatrix}
+    \begin{pmatrix}
+        t_{1}\\
+        t_{2}\\
+        \vdots\\
+        t_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+Všechny featury dohromady:
+
+\begin{gather*}
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}\\
+        x_{1,2} & x_{2,2} & \cdots & x_{n,2}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        x_{1,f} & x_{2,f} & \cdots & x_{n,f}\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        p_{1}\\
+        p_{2}\\
+        \vdots\\
+        p_{n}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}\\
+        x_{1,2} & x_{2,2} & \cdots & x_{n,2}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        x_{1,f} & x_{2,f} & \cdots & x_{n,f}\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        t_{1}\\
+        t_{2}\\
+        \vdots\\
+        t_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+A teď přichází úvaha, o kterém si nejsem 100\% jistý, a to je, že rovnice výše, by měl ještě
+ověřovat poslední váhu, bias, $w_{f+1}$. Toto docílíme jednoduše - přidáme další řádek pod
+maticí featur:
+
+\begin{gather*}
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}\\
+        x_{1,2} & x_{2,2} & \cdots & x_{n,2}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        x_{1,f} & x_{2,f} & \cdots & x_{n,f}\\
+        1 & 1 & \cdots & 1\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        p_{1}\\
+        p_{2}\\
+        \vdots\\
+        p_{n}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_{1,1} & x_{2,1} & \cdots & x_{n,1}\\
+        x_{1,2} & x_{2,2} & \cdots & x_{n,2}\\
+        \vdots & \vdots & \ddots & \vdots\\
+        x_{1,f} & x_{2,f} & \cdots & x_{n,f}\\
+        1 & 1 & \cdots & 1\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        t_{1}\\
+        t_{2}\\
+        \vdots\\
+        t_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+Můžeme teď nahlédnout, že $p_1 + p_2 + \ldots + p_n = t_1 + t_2 + \ldots + t_n$.
+Sice toto přímo neznamená, že $p_1 = t_1$ a $p_2 = t_2$, ale logicky dává smysl, že dokonalá predikce bude
+rovna opravdové hodnotě.
+
+Toto znamená, že stačí ověřit:
+
+\begin{gather*}
+    \begin{pmatrix}
+        x_{1,1} & x_{1,2} & \cdots & x_{1,f} & 1\\
+        x_{2,1} & x_{2,2} & \cdots & x_{2,f} & 1\\
+        \vdots & \vdots & \ddots & \vdots & \vdots\\
+        x_{n,1} & x_{n,2} & \cdots & x_{n,f} & 1\\
+    \end{pmatrix}
+    \begin{pmatrix}
+        w_{1}\\
+        w_{2}\\
+        \vdots\\
+        w_{f+1}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        t_{1}\\
+        t_{2}\\
+        \vdots\\
+        t_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+Teď, abychom se dozvědělí optimální váhy $w_1$ až $w_{f+1}$, stačí vynásobit obě strany rovnice zleva
+inverzní maticí featur a jako finální rovnici získáme:
+
+\begin{gather*}
+    \begin{pmatrix}
+        w_{1}\\
+        w_{2}\\
+        \vdots\\
+        w_{f+1}\\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        x_{1,1} & x_{1,2} & \cdots & x_{1,f} & 1\\
+        x_{2,1} & x_{2,2} & \cdots & x_{2,f} & 1\\
+        \vdots & \vdots & \ddots & \vdots & \vdots\\
+        x_{n,1} & x_{n,2} & \cdots & x_{n,f} & 1\\
+    \end{pmatrix}
+    ^{-1}
+    \begin{pmatrix}
+        t_{1}\\
+        t_{2}\\
+        \vdots\\
+        t_{n}\\
+    \end{pmatrix}
+\end{gather*}
+
+\end{document}
