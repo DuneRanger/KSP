@@ -1,0 +1,68 @@
+% \documentclass{ksp}
+\documentclass{../../../ksp-smallText}
+
+\title{KSP 36--Z1--4}
+\author{Daniel Culliver}
+\date{Srpen 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Řešení}
+
+Úloha je poměrně jednoznačná, takže se pustím rovnou do řešení. Budu uvažovat o hmotnosti a zajímavosti pytlíku
+jako o dvou různých polích, kde stejné indexy budou odkazovat na vlastnosti téhož pytlíku. Toto nezmění prostorovou komplexitu
+a přijde mi to lepší pro znázornění v pseudokódu.
+
+Tato úloha je dost podobná klasické úloze o maximálním součtu. Jen, místo komplikace se zápornými čísly tu máme komplikaci s
+omezenou délkou úseku. Ze zadání je zřejmé, že jestliže máme nějaký úsek provazu a naše síla nám umožní vzít ještě jeden pytlík,
+vezmeme ho. Tedy, nemusíme řešit všechny možné úseky a jejich zajímavosti, ale jen všechny nejdelší možné úseky, 
+které jsme schopni unést a najít nejzajímavější z nich.
+ 
+Jak tyto nejdelší možné úseky najdeme? Velmi jednoduše, začneme z prvního pytlíku a nabereme další pytíky, dokud je už neudržíme.
+Takhle získáme první úsek. Abychom mohli nabrat další pytlík, musíme se zbavit nějakých, které už máme. Protože pracujeme
+v souvislých úsecích, musíme opusit první pytlík, který jsme nabrali. Jestli už můžeme nabrat další pytlík, tak můžeme v algoritmu pokračovat dál.
+V případě, že ne, tak opustíme opět první pytlík z úseku. Toto můžeme zopakovat, dokud nenabereme poslední pytlík na celém provazu,
+což znamená, že jsme získali poslední nejdelší možný úsek.
+
+Nejzajímavější z těchto úseků najdeme jednoduše při porovnání pokaždé, když nabereme nový pytlík. Podrobnější ukázka algoritmu
+si ukážeme ve formě pseudokódu:
+
+\begin{algorithm*}
+    \caption{$largestLimitedSum(H, Z, M)$}
+    \begin{algorithmic}
+        \Require{array $H$ of weights, array $Z$ of interests, maximum weight $M$}
+            \State{$i \gets 0$}
+            \State{$j \gets 0$}
+            \State{$curInterest \gets Z_0$}
+            \State{$maxInterest \gets Z_0$}
+            \State{$curWeight \gets H_0$}
+            \State{$bestSumInd \gets (i, j)$}
+            \While{$j < len(H)$}
+                \State{$j$ += 1}
+                \State{$curWeight$ += $H_j$}
+                \State{$curInterest$ += $Z_j$}
+                \While{$curWeight > M$}
+                    \State{$curWeight$ -= $H_i$}
+                    \State{$curInterest$ -= $Z_i$}
+                    \State{$i$ += 1}
+                \EndWhile{}
+                \If{$curInterest$ > $maxInterest$}
+                    \State{$maxInterest \gets curInterest$}
+                    \State{$bestSumInd \gets (i, j)$}
+                \EndIf{}
+            \EndWhile{}
+        \State{\Return{$bestSumInd$}}
+        \Ensure{pair $bestSumInd$, containing the start and end of the best sum}
+    \end{algorithmic}
+\end{algorithm*}
+
+Pseudokód byl napsaný s předpokladem, že vstup je už uložený. V takovém případě nemůžeme dosáhout lépší
+prostorové složitosti než $\BigO(n)$, čehož jsme dosáhli. I kdybychom neměli vstup uložený a museli bychom ho ukládat,
+tak bychom museli jenom ukládat úsek, který nás zrovna zajímá. Tento způsob by sice zabral trochu méně prostoru a
+zároveň by celková komplexita zůstala lineární. Jinak jsme také dosáhli časové složitosti $\BigO(n)$,
+protože na každý pytlík se koukneme maximálně dvakrát --- jednou při posunu $j$ a podruhé při posunu $i$.
+Lepší než lineární časovou složitost také nedokážeme, protože přeci jen musíme alespoň jednou ověřit zajímavost každého prvku.
+
+\end{document}
