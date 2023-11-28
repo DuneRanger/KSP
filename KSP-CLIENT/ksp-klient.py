@@ -62,6 +62,8 @@ class KSPApiService:
     api_url: str = "https://ksp.mff.cuni.cz/api/"
     # Works when I'm in a folder like KSP\35 - H\series2\2-
     token_path: str = os.path.join(Path(__file__).parent.parent.parent.parent.absolute(), "KSP-CLIENT/.config", "ksp-api-token")
+    # token_path: str = os.path("D:\Users\danie\OneDrive\Personal-projects\Coding\GitHub\KSP\KSP-CLIENT", ".config", "ksp-api-token")
+    # token_path: str = os.path.join("D:\\", "Users", "danie", "OneDrive", "Personal-projects", "Coding", "Github", "KSP", "KSP-CLIENT", ".config", "ksp-api-token")
 
     def __init__(
         self, api_url: Optional[str] = None,
@@ -73,6 +75,7 @@ class KSPApiService:
             self.api_url = api_url
         if token_path is not None:
             self.token_path = token_path
+            print(token_path)
         self.ca_bundle_path = ca_bundle_path
 
         try:

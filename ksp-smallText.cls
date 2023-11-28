@@ -3,10 +3,10 @@
 
 \NeedsTeXFormat{LaTeX2e}
 % \ProvidesClass{ksp}[2022/03/16 A template for KSP theoretical exercises]
-\ProvidesClass{../../../ksp}[2022/03/16 A template for KSP theoretical exercises]
- 
-\LoadClass[a4paper, 10pt, fleqn]{article}
+\ProvidesClass{../../../ksp-smallText}[2022/03/16 A template for KSP theoretical exercises]
 
+\LoadClass[a4paper, 10pt, fleqn]{article}
+ 
 \RequirePackage[T1]{fontenc}  % modern font encoding
 \RequirePackage{sectsty} % font size settings
 \RequirePackage[czech]{babel} % font spacing
