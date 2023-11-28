@@ -1,0 +1,207 @@
+\documentclass{../../../ksp}
+
+\title{KSP 35-4-S}
+\author{Daniel Culliver}
+\date{Březen 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Úkol 1 – Mnohoúhelník [4b]}
+
+Přímku v rovině jsme schopni zapsat jako lineární rovnici $y = ax + b$.
+Začneme bodem $A = {(a,\ b)}^T$ a směrovým vektorem přímky $\bm{u} = (u_x,\ u_y)$.
+Víme, že můžeme vyjádřit přímky jako:
+\begin{align*}
+    x &= a + u_x \cdot t\\
+    y &= b + u_y \cdot t
+\end{align*}
+Kde $t$ je reálný parametr.
+Z první rovnice můžeme vyjádřit $t$: $t = \frac{x-a}{u_x}$ a to můžeme dosadit do druhé rovnice:
+
+\begin{align*}
+    y &= b + \frac{x-a}{u_x} \cdot u_y\\
+    y &= \frac{u_y}{u_x} \cdot x + b - \frac{u_y}{u_x} \cdot a\\
+\end{align*}
+Můžeme si všimnout, že $\frac{u_y}{u_x}$ je vlastně tangens úhlu mezi $\bm{u}$ a osou $x$,
+ale pro náš případ je vhodnější rovnou používat hodnoty vektoru $\bm{u}$.
+Můžeme tedy velmi jednoduše z jednoho vektoru a bodu vytvořit rovnici přímky,
+u které lze jednoduše (až na jednu výjimku) určit polohu bodu vůči přímce.
+
+Potom stačí pro každý bod $\bm{p}_1,\ \dots ,\ \bm{p}_n$ vytvořit přímku, která vede k následujícímu bodu
+a určit jestli je daný bod $\bm{x}$ ``nad'' nebo ``pod'' přimkou.
+Nejdřív musíme určit, který z těchto variant vůbec chceme.
+
+
+\includegraphics{heptagon2.png}
+
+Ukážeme si příklad sedmiúhelníku. Protože víme, že mnohoúhelník bude vždy konvexní, můžeme jednoduše zpozorovat vlastnost,
+že pokud x-ová souřadnice prvního bodu je menší než x-ová souřadnice dalšího bodu (např. body $\bm{p}_1$ a $\bm{p}_2$),
+budeme chtít, aby bod $\bm{x}$ ležel pod přímkou. Naopak, když x-ová souřadnice prvního bodu bude větší (např. body $\bm{p}_6$ a $\bm{p}_7$),
+budeme chtít, aby bod $\bm{x}$ ležel nad přímkou.
+Určení polohy $\bm{x}$ vůči přímce lze jednoduše nerovnicí $y \leq \frac{u_y}{u_x} \cdot x + b - \frac{u_y}{u_x} \cdot a$,
+kde můžeme zaměnit $\leq$ za $\geq$, dle potřeby.
+
+Musíme ale ještě vyřešit jednu zvláštní výjimku, kde $u_x = 0$ a nerovnice nebude definovaná (např. pro pravidelný šestiúhleník). Pro tento případ stačí jen
+porovnat x-ovou souřadnici bodu $\bm{x}$ s x-ovou souřadnicí libovolného bodu té přímky a získame odpověď. Samozřejmě, je potřeba ještě rozlišit
+levou a pravou stranu mnohoúhelníku, ale to můžeme jednoduše nahlédnutím na předchozí, popřípadě dalšímu bodu a opět porovnat x-ové souřadnice.
+
+Sice to bylo dlouhé vysvětlení, ale pro každý bod provedeme konstantní množství operací (počítání vektoru, dosazení do rovnice a rozhodovací logika)
+a algoritmus nám vyjde jako lineární.
+
+Napadlo mě také aproximace kružnicí, ale to také vychází lineárně, kvůli počítání středu mnohoúhelník. Proto si nemyslím, že to jde lépe než lineárně.
+
+
+\section*{Úkol 2 – Vzdálenost od roviny [6b]}
+
+
+Před tím než začneme řešit úlohu s čísly, nejdřív vyjádříme potřebný vzorec obecně.
+Z dočtených informací víme, že v rovině můžeme pracovat s bodem $\bm{x}$ vůči přímce jako v bázi
+definovaná vektorem té přímky a vektor na ní kolmou. Tedy
+$\bm{x} = \frac{\langle \bm{x}, \bm{u} \rangle}{||u||}\bm{\bm{u}} + \frac{\langle \bm{x}, \bm{n} \rangle}{||\bm{n}||}\bm{n}$.
+Také jsme se dočetli o tom, že projekci bodu $\bm{x}$ na přímce lze zapsat jako
+$\bm{x}_u = \frac{\langle \bm{x}, \bm{u} \rangle}{||u||}\bm{u}$
+A vzdálenost bodu $\bm{x}$ od přímky je rovna vzdálenosti bodu od její projekci.
+
+Toto vše nám stačí, abychom spočítali vzdálenost bodu od roviny v prostoru.
+
+Rovinu $\rho$ máme definovanou jako $\bm{c} + a_1\bm{u}_1 + a_2\bm{u}_2$.
+Už rovnou můžemem vyjádřit projekci bodu $\bm{x}$ v rovině $\rho$:
+$\bm{x}_{\rho} = \frac{\langle \bm{x}, \bm{u}_1 \rangle}{||\bm{u}_1||}\bm{u}_1 + \frac{\langle \bm{x}, \bm{u}_2 \rangle}{||\bm{u}_2||}\bm{u}_2$
+K vyjádření samotného bodu $\bm{x}$ budeme ale potřebovat ještě jeden vektor, který je kolmý na $\bm{u}_1$ a $\bm{u}_2$.
+Vzhledem k tomu, že v seriálu se přidává kolmý vektor bez vysvětlení, budu předpokládat, že totéž také můžu udělat.
+Máme tedy bázi $\bm{u}_1$, $\bm{u}_2$ a $\bm{n}$. I když vektory $\bm{u}_1$ a $\bm{u}_2$ nejsou na sebe kolmé, za chvíli ukážu proč to není potřeba.
+Bod $\bm{x}$ teď můžeme vyjádřit jako
+$\bm{x}_{\rho} = \frac{\langle \bm{x}, \bm{u}_1 \rangle}{||\bm{u}_1||}\bm{u}_1 + \frac{\langle \bm{x}, \bm{u}_2 \rangle}{||\bm{u}_2||}\bm{u}_2 + \frac{\langle \bm{x}, \bm{n} \rangle}{||\bm{n}||}\bm{n}$.
+Vzdálenost bodu $\bm{x}$ od roviny $\rho$ je tedy rovna $||\bm{x} - \bm{x}_{\rho}||$, což po odečtení vypadá takto:
+$||\frac{\langle \bm{x}, \bm{n} \rangle}{||\bm{n}||}\bm{n}||$.
+
+Teď, když víme že nám stačí jen znát vektor kolmý na rovinu od které měříme, můžeme velmi jednoduše vypočítat zadaný příklad.
+
+Mějme tedy $\bm{x} = {(6,\ 3,\ 3)}^T$, $\bm{u}_1 = {(2,\ -3,\ 6)}^T$ a $\bm{u}_2 = {(4,\ 4,\ 2)}^T$.
+Kolmý vektor $\bm{n}$ vypočítáme vektorovým násobením: $\bm{n} = \bm{u}_1 \times \bm{u}_2 = {(-30,\ 20,\ 20)}^T$.
+Protože tento výpočet dělám manuálně, místo toho abych celý vektor normalizoval, jen rychle zmenším jeho velikost na:
+$\bm{n} = {(-3,\ 2,\ 2)}^T$.
+
+Teď můžeme dosadit do naší předchozí rovnice:
+\begin{align*}
+    ||\bm{x}\rho|| &= ||\frac{\langle \bm{x}, \bm{n} \rangle}{||\bm{n}||}\bm{n}||\\
+    &= ||\frac{-6}{\sqrt[]{17}}{(-3,\ 2,\ 2)}^T||\\
+    &= ||\frac{{(18,\ -12,\ -12)}^T}{\sqrt[]{17}}||\\
+    &= \sqrt[]{\frac{{(324,\ 144,\ 144)}^T}{17}}\\
+    &= \sqrt[]{\frac{324 + 144 + 144}{17}}\\
+    &= \sqrt[]{36}\\
+    &= 6\\
+\end{align*}
+
+
+\section*{Úkol 3 – Fyzikální měření [5b]}
+
+Máme tedy nějaké naměřené hodnoty (body), kterým můžeme přiřadit x-ové a y-ové souřadnice
+a hledáme nějakou přimku, abychom minimalizovali vzdálenost těchto bodů od přímky.
+
+Když vyjádříme přimku jako $y = ax + b$, poznáme, že každý z těch bodů můžeme dosadit do této rovnice za $x$ a $y$
+a potom získame soustavu rovnic o dvou neznámých $a$ a $b$, které pro nás budou na konci značit koeficienty naší hledané přímky.
+
+Abychom mohli už pracovat přímo s něčím z tohot textu a ne jen z hodnot, které tu nejsou napsané, 
+nejdřív vypíšu naší nalezenou soustavu rovnic s dosazenými body:
+\begin{align*}
+    67 &= 0a + b \\
+    66 &= 3a + b\\
+    63 &= 10a + b\\
+    62 &= 14a + b\\
+    60 &= 20a + b\\
+\end{align*}
+
+Samozřejmě už víme, že tato soustava nemá řešení, ale hledáme takový $a$ a $b$, které vyjádří naší hledanou přímku.
+Naštěstí, rovnice na řešení tohoto problému nám už byla představena: $\mathbb{A}^T \mathbb{Ax} = \mathbb{A}^T \mathbb{x}$, 
+kde $\mathbb{A}$ pro nás značí koeficienty v tét soustavě rovnic, $\mathbb{x}$ značí hledané neznámé $a$ a $b$ a $\mathbb{b}$ značí
+levou stranu soustavy (y-ové hodnoty).
+
+Dosadíme tedy do rovnici a získáme:
+
+\begin{align*}
+    \begin{pmatrix}
+        1 & 1 & 1 & 1 & 1 \\
+        0 & 3 & 10 & 14 & 20 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        3 & 1 \\
+        10 & 1 \\
+        14 & 1 \\
+        20 & 1 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        a \\
+        b \\
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        1 & 1 & 1 & 1 & 1 \\
+        0 & 3 & 10 & 14 & 20 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        67 \\
+        66 \\
+        63 \\
+        62 \\
+        60 \\
+    \end{pmatrix}
+    \\
+    \begin{pmatrix}
+        47 & 5 \\
+        703 & 47 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        a \\
+        b \\
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        318 \\
+        2896 \\
+    \end{pmatrix}
+    \\
+    \begin{pmatrix}
+        a \\
+        b \\
+    \end{pmatrix}
+    &=
+    \frac{-1}{1306}
+    \begin{pmatrix}
+        47 & -5 \\
+        -703 & 47 \\
+    \end{pmatrix}
+    \begin{pmatrix}
+        318 \\
+        2896 \\
+    \end{pmatrix}
+    \\
+    \begin{pmatrix}
+        a \\
+        b \\
+    \end{pmatrix}
+    &=
+    \frac{-1}{1306}
+    \begin{pmatrix}
+        466 \\
+        -87422 \\
+    \end{pmatrix}
+    \\
+    \begin{pmatrix}
+        a \\
+        b \\
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        \frac{-233}{656} \\
+        66 \frac{626}{653} \\
+    \end{pmatrix}
+\end{align*}
+
+Rychlost vypařování tekutého dusíku tedy můžeme aproximovat jako přímku
+$y = \frac{-233}{656}x + 66 \frac{626}{653}$.
+
+\end{document}
