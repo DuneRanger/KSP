@@ -1,0 +1,30 @@
+% \documentclass{ksp}
+\documentclass{../../../ksp}
+
+\title{KSP 36--Z2--4}
+\author{Daniel Culliver}
+\date{Listopad 2023}
+
+\begin{document}
+
+\maketitle
+
+\section*{Řešení}
+
+Rovnou můžeme říct, že jestliže je na cíli zrychlovák, vstup není možné vyřešit.
+Beru to tak, že i když vypnu zrychlovák na posledním místě, tak bych se vlastně nedostal na poslední
+místo, tedy nedorazil bych do cíle.
+Jestliže tento předpoklad je chybný, i tak bude fungovat můj algoritmus, ale nebude vracet tento edge-case
+jako neřešitelný.
+
+Po tomhle víme, že u každého vstupu budeme moct zpomalit na nulovou rychlost u cíle.
+Jako další krok projdeme celý vstup a budeme průbežně počítat naši rychlost.
+V případě, že kdykoliv bude záporná, zapíšeme si, vypneme zpomalovák, přes které jsem zrovna jeli,
+upravíme naši rychlost zpátky na to, co bylo před zpomalovákem a pokračujeme dál.
+Je zřejmé, že každé toto vypnutí je nutné, abychom vůbec dojeli do cíle.
+
+Teď víme, že dojedeme do cíle buď s nulovou rychlostí, kdy nemusíme nic dál řešit, nebo s kladnou rychlostí.
+V případě, kdy dojedeme do cíle s kladnou rychlostí $v$, tak je zřejmé, že musíme vypnout posledních $v$ zrychlováků.
+
+
+\end{document}
