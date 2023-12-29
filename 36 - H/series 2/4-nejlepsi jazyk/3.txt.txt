@@ -1,0 +1,9 @@
+cs ++ cs pop2 cs pop2 cs rem ++ ++ cs u
+
+cs ++ cs pop2 cs pop2 cs rem ++ ++ ++ ++ cs cs cs rem ++ qeq cs cs rem u
+
+cs ++ cs pop2 cs pop2 cs rem ++ ++ m pop2
+
+cs ++ cs pop2 cs pop2 cs rem ++ cs ++ lroll
+
+cs ++ cs pop2 cs pop2 cs rem ++ ++ m pop2 pop2
