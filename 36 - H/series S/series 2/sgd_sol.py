@@ -46,8 +46,6 @@ def main(args: argparse.Namespace):
         # Nemíchejte původní trénovací dataset, ale jen jeho kopii, tedy
         # `train_data` zůstane nezměněný přes všechny epochy.
         random_arr = generator.permutation(len(train_data))
-        # print(random_arr)
-        # print(len(weights), len(train_data[0]))
 
         # TODO: Pro každou batch s velikostí args.batch_size spočítejte gradient
         # a upravte váhy. Pokud je args.l2 nenulové, tak upravte váhy i s l2 regularizací.
@@ -62,11 +60,8 @@ def main(args: argparse.Namespace):
                     prediction += train_data[random_arr[batch+i]][j]*weights[j]
                 predictions.append(prediction)
             for i in range(args.batch_size):
-                gradient_single = 0
                 for j in range(len(weights)):
                     descent[j] += 2 * (predictions[i]-train_target[random_arr[batch+i]])*train_data[random_arr[batch+i]][j]/args.batch_size
-                # descent.append(gradient_single/args.batch_size)
-            # print(descent, "\n\n\n\n\n\n\n")
             for i in range(len(weights)):
                 new_weights.append(weights[i] - args.learning_rate*descent[i] - args.learning_rate*args.l2*2*weights[i])
             weights = new_weights
