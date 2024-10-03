@@ -1,0 +1,22 @@
+cs cs lensum cs funkcia
+cs pop pop
+cs cs lensum ++ cs lensum ++ cs ^^
+cs cs lensum m
+cs cs lensum cs lensum ++ % 
+cs u cs bitshift ++ bitshift 
+cs cs lensum m
+pop2 pop2
+cs cs lensum cs funkcia ++
+cs cs cs % qeq
+cs cs lensum cs funkcia
+u
+cs cs cs lensum cs funkcia ++ ++ ++ ++ ++ ++
+cs cs lensum cs funkcia ++
+cs ++ lroll
+cs cs lensum cs funkcia ++ ++ ++ ++ ++
+u
+cs pop2 cs cs lensum cs funkcia ++
+cs cs cs % qeq
+cs cs lensum cs funkcia
+u
+BRZ pop pop
