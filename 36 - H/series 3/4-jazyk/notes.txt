@@ -1,0 +1,4 @@
+viz ksplang
+
+Sekvence se může optimalizovat duplikací jenom kladného čísla
+Takže řazení se musí provádět duplikací, negace jednoho, součet a potom signum asi
